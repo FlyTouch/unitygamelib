@@ -70,11 +70,11 @@ Unity部分底层框架，包含于网络框架(TCP/HTTP/UDP)，热更新框架�
              
              
 #2.定时器功能实现
-  类:TimerDemo
-  调用方式: 
-        TimerInfo timerInfo = new TimerInfo("TimerDemo", timerCommond,10); //参数: 定时器Name, 回调接口，定时器执行的总次数(为0代表无线循环)
-        TimerManager timerManager = AppFacade.Instance.GetManager<TimerManager>(ManagerName.Timer);
-        timerManager.AddTimerEvent(timerInfo);
+              类:TimerDemo
+              调用方式: 
+                    TimerInfo timerInfo = new TimerInfo("TimerDemo", timerCommond,10); //参数: 定时器Name, 回调接口，定时器执行的总次数(为0代表无线循环)
+                    TimerManager timerManager = AppFacade.Instance.GetManager<TimerManager>(ManagerName.Timer);
+                    timerManager.AddTimerEvent(timerInfo);
         
    
         
