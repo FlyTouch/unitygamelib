@@ -13,4 +13,9 @@ public class TConfig : NetConfig
     /// 连接端口
     /// </summary>
     public int port { get; set; }
+
+    /// <summary>
+    /// socket 名称
+    /// </summary>
+    public string name { get; set; }
 }

@@ -34,7 +34,7 @@ public class TSocketClient : SockProxy
     public int autoConnecSecond = 1000;
  
 
-    public NetHandler.NetCoreCallBack netCoreCallBack = null;
+    public ISocketMessage  socketMessage = null;
 
     /// <summary>
     /// 接受字节
@@ -47,9 +47,9 @@ public class TSocketClient : SockProxy
     /// <param name="netCoreBackData"></param>
     public virtual void setCallBack(NetCoreBackData netCoreBackData)
     {
-        if (netCoreCallBack != null)
+        if (socketMessage != null)
         {
-            netCoreCallBack.Invoke(netCoreBackData);
+            socketMessage.NetCoreCallBack(netCoreBackData);
         }
     }
 }

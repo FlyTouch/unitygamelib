@@ -7,5 +7,6 @@ public class StartUpCommand : ControllerCommand
     public override void Execute(IMessage message)
     {
         AppFacade.Instance.AddManager<TimerManager>(ManagerName.Timer);
+        AppFacade.Instance.AddManager<NetWorkMgr>(ManagerName.NetWorkMgr);
     }
 }

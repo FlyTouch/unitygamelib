@@ -18,24 +18,17 @@ public class TSock : TSocketClient
     /// <param name="autoconnec">是否重连</param>
     /// <param name="autoConnecSecond">重连间隔</param>
     /// <param name="bufferSize">自定义的缓冲区大小，</param>
-    public TSock(TConfig tConfig, ProtocolType protocolType = ProtocolType.Tcp, bool autoconnec = true,int autoConnecSecond = 1000,int bufferSize=1024)
+    public TSock(TConfig tConfig, ISocketMessage socketMessage,ProtocolType protocolType = ProtocolType.Tcp, bool autoconnec = true,int autoConnecSecond = 1000,int bufferSize=1024)
     {
         this.bufferSize = bufferSize;
+        this.socketMessage = socketMessage;
         InitLize(tConfig);
         this.autoConnecSecond = autoConnecSecond;
         this.protocolType = protocolType;
         this.autoconnec = autoconnec;
     }
 
-    /// <summary>
-    /// 设置回调监听
-    /// </summary>
-    /// <param name="netCoreCallBack"></param>
-    public void AddHandler(NetHandler.NetCoreCallBack netCoreCallBack)
-    {
-        this.netCoreCallBack = netCoreCallBack;
-    }
-
+   
     /// <summary>
     /// 启动socket
     /// </summary>
@@ -113,7 +106,16 @@ public class TSock : TSocketClient
         bytesUtils.Dispose();
         sendEventArg.SetBuffer(null, 0, 0);
         recvEventArg.SetBuffer(null, 0, 0);
-        netCoreCallBack = null;
+ 
+    }
+
+    /// <summary>
+    /// 设置自动重连
+    /// </summary>
+    /// <param name="b"></param>
+    public void setAutoConnection(bool b)
+    {
+        autoconnec = b;
     }
 
     /// <summary>

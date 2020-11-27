@@ -5,5 +5,5 @@ public class ManagerName
 {
 
     public const string Timer = "TimeManager";
-
+    public const string NetWorkMgr = "NetWorkMgr";
 }
