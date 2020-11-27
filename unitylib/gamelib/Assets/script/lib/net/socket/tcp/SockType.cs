@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static BytesUtils;
 
 /// <summary>
 /// 回调类型
@@ -32,7 +33,7 @@ public class NetCoreBackData
     public int _sockType { get { return System.Convert.ToInt32(sockType); } }
 
     /// <summary>
-    /// 返回的字节流
+    /// 返回的消息体
     /// </summary>
-    public byte[] array { get; set; }
+    public NetSerialize netSerialize { get; set; }
 }

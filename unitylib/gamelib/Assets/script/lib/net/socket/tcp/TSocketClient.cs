@@ -27,9 +27,19 @@ public class TSocketClient : SockProxy
     /// 是否连接中
     /// </summary>
     public bool isConnecing = false;
+
+    /// <summary>
+    /// 自动重连事件
+    /// </summary>
+    public int autoConnecSecond = 1000;
  
 
     public NetHandler.NetCoreCallBack netCoreCallBack = null;
+
+    /// <summary>
+    /// 接受字节
+    /// </summary>
+    public BytesUtils bytesUtils = new BytesUtils(new byte[0]);
 
     /// <summary>
     /// 设置回调

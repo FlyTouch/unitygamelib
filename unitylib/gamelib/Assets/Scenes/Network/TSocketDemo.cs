@@ -14,9 +14,33 @@ public class TSocketDemo : MonoBehaviour
     {
 
         sock = new TSock(new TConfig() { ip = ip, port = port });
+        sock.AddHandler(delegate (NetCoreBackData netCoreBackData) {
+
+            switch (netCoreBackData.sockType)
+            {
+                ///首次连接成功
+                case SockType.ChannelRegistered:
+
+                    break;
+                //断线重连成功
+                case SockType.ChannelResetRegistered:
+
+                    break;
+                //socket 断开
+                case SockType.ChannelWillBreak:
+
+                    break;
+                //新消息
+                case SockType.ChannelRead:
+
+                    Debug.Log("接受到新消息了!");
+
+                    break;
+            }
+
+        });
         sock.Start();
-
-
+    
     }
 
     // Update is called once per frame
@@ -30,5 +54,10 @@ public class TSocketDemo : MonoBehaviour
                 sock.Send(new TSendModel() {  msgId = 1, array = hd});
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        sock.Dispose();
     }
 }

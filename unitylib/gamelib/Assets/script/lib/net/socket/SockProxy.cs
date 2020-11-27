@@ -57,7 +57,7 @@ public class SockProxy : INetWork
     private byte[] sendBuff = null;
 
 
-    public void Dispose()
+    public virtual void Dispose()
     {
 
     }
