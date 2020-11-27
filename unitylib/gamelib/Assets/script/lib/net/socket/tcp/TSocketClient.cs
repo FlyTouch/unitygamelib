@@ -23,6 +23,11 @@ public class TSocketClient : SockProxy
     /// </summary>
     public bool isConnection = false;
 
+    /// <summary>
+    /// 是否连接中
+    /// </summary>
+    public bool isConnecing = false;
+ 
 
     public NetHandler.NetCoreCallBack netCoreCallBack = null;
 

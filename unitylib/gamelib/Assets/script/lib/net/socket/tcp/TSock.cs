@@ -44,6 +44,8 @@ public class TSock : TSocketClient
     {
         try
         {
+
+            isConnecing = true;
             SocketAsyncEventArgs connectEventArg = new SocketAsyncEventArgs();
             connectEventArg.Completed += new System.EventHandler<SocketAsyncEventArgs>(ConnectEventArgs_Completed);
             connectEventArg.RemoteEndPoint = endPoint;
@@ -73,10 +75,12 @@ public class TSock : TSocketClient
             setCallBack(new NetCoreBackData() {  sockType = isFirstConnec? SockType.ChannelRegistered: SockType.ChannelResetRegistered});
             isFirstConnec = true;
             isConnection = true;
+            isConnecing = false;
             StartRecv();
         }
         else
         {
+            isConnecing = false;
             Log("连接服务器失败! {0}", socketAsyncEventArgs.SocketError);
             setCallBack(new NetCoreBackData() {  sockType = SockType.ChannelConnectionFail});
             ResetConnection();
@@ -88,9 +92,16 @@ public class TSock : TSocketClient
     /// </summary>
     public void ResetConnection()
     {
+        ///如果没有连接。就返回
+        if (isConnecing == true)
+        {
+            return;
+        }
+        isConnecing = true;
         isConnection = false;
         Thread.Sleep(5000);
-        Action();
+        if (socket != null) { socket.Close(); }
+        Start();
     }
 
     /// <summary>
@@ -104,13 +115,13 @@ public class TSock : TSocketClient
         {
             case SocketAsyncOperation.Send:
 
-                ProcessReceive(e);
+                ProcessSend (e);
 
                 break;
 
             case SocketAsyncOperation.Receive:
 
-                ProcessSend(e);
+                ProcessReceive(e);
 
                 break;
         }
@@ -126,6 +137,7 @@ public class TSock : TSocketClient
         //如果接收正常
         if(e.SocketError == SocketError.Success && e.BytesTransferred > 0)
         {
+            Log("嗨，BB, 你有新消息了 {0}",e.BytesTransferred);
             //否则，继续请求接收
             StartRecv();
         }
