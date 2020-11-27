@@ -7,12 +7,30 @@ Unity部分底层框架，包含于网络框架(TCP/HTTP/UDP)，热更新框架�
 #1.网络部分
 
    1.TCP通信，服务器采用 NetCore Donetty 网络框架，客户端为异步逻辑，处理方面， 关于TCP的粘包，断线重连，移动端切后台处理，封装方式简单，
-     基本几行代码就可以实现一个Tcp实例
+     基本几行代码就可以实现一个Tcp实例,
+     
+     协议指定方式:
+     消息头:byte  0x09
+     消息ID:short 
+     消息长度:int
+     消息体:自定义
+     
      代码部分:TSock.cs  demo TSocketDemo.cs  启动后自动连接，按A键发送消息
      使用说明:
         
             创建socket 实例:
-            TSock sock =  new TSock("127.0.0.1",9000);
+            TSock sock =  new TSock(new TConfig() { ip = ip, port = port });
+            
+            其他构造参数可选:
+            /// <summary>
+             /// 构造函数
+             /// </summary>
+             /// <param name="tConfig">Socket基础配置</param>
+             /// <param name="protocolType">Socket 类型，默认为TCP</param>
+             /// <param name="autoconnec">是否重连</param>
+             /// <param name="autoConnecSecond">重连间隔</param>
+             /// <param name="bufferSize">自定义的缓冲区大小，</param>
+            
             //添加socket 事件监听
             sock.AddHandler(delegate (NetCoreBackData netCoreBackData) {
                switch (netCoreBackData.sockType)
