@@ -18,6 +18,7 @@ public class TSock : TSocketClient
     /// <param name="autoconnec">是否重连</param>
     /// <param name="autoConnecSecond">重连间隔</param>
     /// <param name="bufferSize">自定义的缓冲区大小，</param>
+    /// <param name="ISocketMessage">自定义回调，</param>
     public TSock(TConfig tConfig, ISocketMessage socketMessage,ProtocolType protocolType = ProtocolType.Tcp, bool autoconnec = true,int autoConnecSecond = 1000,int bufferSize=1024)
     {
         this.bufferSize = bufferSize;

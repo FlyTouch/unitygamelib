@@ -12,10 +12,11 @@ public class TSocketDemo : MonoBehaviour,ISocketMessage
     // Start is called before the first frame update
     void Start()
     {
-
-        sock = new TSock(new TConfig() { ip = ip, port = port, name = "TsocketDemo" }, this);
+        AppFacade.Instance.StartUp();
+        NetWorkMgr networkMgr = AppFacade.Instance.GetManager<NetWorkMgr>(ManagerName.NetWorkMgr);
+        sock = networkMgr.CreateTcpSocket(new TConfig() { ip = ip, name = "TSocketDemo", port = port }, this);
         sock.Start();
-    
+
     }
 
     // Update is called once per frame
